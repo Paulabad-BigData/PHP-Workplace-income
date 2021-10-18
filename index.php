@@ -1,7 +1,36 @@
 <?php
 
-include 'global/connection.php';
-include 'global/methodsDB.php';
+//require("connection.php");
+
+$conexion = mysqli_connect("localhost", "root", "paula", "asistencia") or die ("Problemas de conexion");
+
+
+$mensaje ="";
+
+$code = $_POST['codigo'];
+
+$registros = mysqli_query($conexion,"SELECT * FROM empleado WHERE codigo = '$code'")
+or die("Problemas en el select:" .mysqli_error($conexion));
+
+if ($reg = mysqli_fetch_array($registros)){
+    echo "Acceso Autorizado";
+    //$mensaje = "Acceso Autorizado";
+}else{
+    echo "Acceso Denegado";
+    //$mensaje = "Acceso Denegado";
+}
+
+mysqli_query($conexion, "INSERT INTO ingreso (codigo,nombre,documento,dpto)  (SELECT codigo,nombre,documento,dpto FROM empleado)")
+        or die("problemas en el select" .mysqli_error($conexion));
+        mysqli_close($conexion);
+
+
+
+
+
+
+//include 'global/connection.php';
+//include 'global/methodsDB.php';
 //include 'home.php';
 include 'templates/header.php';
 
@@ -10,30 +39,23 @@ include 'templates/header.php';
           <div class="row"style="margin-top: 2%;">
           <center><h1>Registro Empleados</h1></center>
 
-          <?php
-
-            $miobjeto = new methods;
-            $datos = $miobjeto->consult($code);
-
-            // es un ciclo solo para recorrer arrays 
-            foreach($datos as $mostrar){
-
-            ?>
-
-
-
               <div class="col-6" style="margin-top: 2%;">
-                  <form action="" method="POST">
+                  <form action="index.php" method="POST">
                     <div class="form-group">
                         <h3>Ingreso</h3>
-                        <input type="text" class="form-control" name="code" id="code" aria-describedby="helpCode" placeholder="Codigo">
+                        <input type="text" class="form-control" name="codigo" id="codigo" aria-describedby="helpCode" placeholder="Codigo">
                     </div>
                     <br>
-                    <button type="submit" name="btnAccion" value="Buscar" class="btn btn-success">Ingreso</button>
+                    <button type="submit" name="" value="Buscar" class="btn btn-success">Ingreso</button>
+                    <br>
+                    <br>
+
+                    <input class="form-control" type="text" placeholder="Mensaje" <?php echo $mensaje; ?> readonly>
+
                 </form>
+                
               </div>
 
-                <?php } ?>
 
 
               <div class="col-6" style="margin-top: 2%;">
