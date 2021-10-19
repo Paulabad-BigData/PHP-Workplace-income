@@ -13,7 +13,8 @@
   <body>
       <nav class="navbar navbar-expand navbar-light bg-success">
           <div class="nav navbar-nav">
-              <a class="nav-item nav-link active" href="index.php">Inicio <span class="visually-hidden">(current)</span></a>
+              <a class="nav-item nav-link active" href="index.php">Ingreso <span class="visually-hidden">(current)</span></a>
+              <a class="nav-item nav-link" href="exit.php">Salida</a>
               <a class="nav-item nav-link" href="report.php">Reportes</a>
           </div>
       </nav>

@@ -13,16 +13,16 @@ or die("Problemas en el select:" .mysqli_error($conexion));
 
 if ($reg = mysqli_fetch_array($registros))
 {
-    mysqli_query($conexion, "INSERT INTO ingreso (codigo,nombre,documento,dpto)  (SELECT codigo,nombre,documento,dpto FROM empleado)")
+    mysqli_query($conexion, "INSERT INTO salida (codigo,nombre,documento,dpto)  (SELECT codigo,nombre,documento,dpto FROM empleado)")
         or die("problemas en el select" .mysqli_error($conexion));
         mysqli_close($conexion);
 
     //echo "Acceso Autorizado";
-    $mensaje = "Acceso Autorizado";
+    $mensaje = "Empleado Salio";
 }else
 {
     //echo "Acceso Denegado";
-    $mensaje = "Acceso Denegado";
+    $mensaje = "Se escapo";
 }
 
 
@@ -42,16 +42,16 @@ include 'templates/header.php';
 
 ?>
           <div class="row"style="margin-top: 2%;">
-          <center><h1>Ingreso Empleados</h1></center>
+          <center><h1>Salida Empleados</h1></center>
 
               <div class="col-12" style="margin-top: 2%;">
-                  <form action="index.php" method="POST">
+                  <form action="exit.php" method="POST">
                     <div class="form-group">
-                        <h3>Ingreso</h3>
+                        <h3>Salida</h3>
                         <input type="text" class="form-control" name="codigo" id="codigo" aria-describedby="helpCode" placeholder="Codigo">
                     </div>
                     <br>
-                    <button type="submit" name="" value="Buscar" class="btn btn-success">Ingreso</button>
+                    <button type="submit" name="" value="Buscar" class="btn btn-warning">Salida</button>
                     <br>
                     <br>
 
