@@ -2,10 +2,10 @@
 
 class connect
 {
-    private $server = 'localhost';
-    private $user = 'root';
-    private $password = 'paula';
-    private $db = 'asistencia';
+    private $server = '';
+    private $user = '';
+    private $password = '';
+    private $db = '';
 
     public function connection()
     {
