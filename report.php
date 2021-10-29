@@ -1,55 +1,51 @@
 <?php
 
-//include 'global/connection.php';
-
-$conexion = mysqli_connect("localhost", "root", "paula", "asistencia") or die ("Problemas de conexion");
-
-
-$result = mysqli_query($conexion, "SELECT * FROM ingreso(codigo,nombre,ingreso) &salida(salida) WHERE codigo='$code',nombre='$nombre',ingreso='$ingreso',salida='$salida'");
-
-
-
 include 'templates/header.php';
+include 'global/connection.php';
+include 'global/methodsDB.php';
+include 'global/conectors.php';
 
 
 ?>
 
+<br>
+<br>
+<center><h2>Reporte Ingreso y Salida de Empleados</h2></center>
 
-            <div class="col-12" style="margin-top: 2%;">
-            <h2>Reporte Ingreso y Salida de Empleados</h2>
-            <?php
+<table class="table mt-4 table-hover">
+    <thead>
+        <tr>
+            <th scope="col">CODIGO</th>
+            <th scope="col">NOMBRE</th>
+            <th scope="col">FECHA INGRESO</th>
+            <th scope="col">FECHA SALIDA</th>
+        </tr>
+    </thead>
+    <tbody>
+    <?php
 
-            echo "<table>";
-                echo "<thead>";
-                    echo "<tr>";
-                        echo "<th>CODIGO</th>";
-                        echo "<th>NOMBRE</th>";
-                        echo "<th>FECHA INGRESO</th>";
-                        echo "<th>FECHA SALIDA</th>";
-                    echo "</tr>";
-                echo "</thead>";
-                echo "<tbody>";
-                while ($row = mysql_fetch_row($result)){
-                    echo "<tr>";
-                    echo "
-                        <td>" . $row['codigo'] . "</td>
-                        <td>" . $row['nombre'] . "</td>
-                        <td>" . $row['ingreso'] . "</td>
-                        <td>" . $row['salida'] . "</td>
-                        ";
-                    echo "</tr>";
-                }
-                echo "</tbody>";
-            echo "</table>";
+        $con = new methods;
+        $sql = "SELECT * from ingreso,salida";
+        
 
-            ?>
-            </div>
+        $data = $con->show($sql);
+        
 
-    <!-- Bootstrap JavaScript Libraries -->
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+        foreach ($data as $show) {
+
+    ?>
+        <tr>
+          <th><?php echo $show['codigo'] ?></th>
+          <th><?php echo $show['nombre'] ?></th>
+          <th><?php echo $show['ingreso'] ?></th>
+          <th><?php echo $show['salida'] ?></th>
+        </tr>
+        <?php } ?>
+    </tbody>
+</table>
+
+
 
 
 
 <?php include 'templates/footer.php';
-      

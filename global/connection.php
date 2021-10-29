@@ -14,7 +14,7 @@ class connect
     } // cierro Metodo
 } // cierro Clase
 
-$obj = new connect;
+// $obj = new connect;
 
 /**
  * Se realiza prueba para verificar la conexión atravez de condicional
